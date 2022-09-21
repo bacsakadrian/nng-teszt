@@ -30,3 +30,21 @@ export function createUIElement(repositoryElement) {
     let seatWrapper = document.getElementById("seatwrapper");
     seatWrapper.appendChild(repositoryElement);
 }
+
+//Felhasználói felületen megjelenítem a megoldásokat
+export function showResults(results, seatsArray, neededSeatsCount) {
+    let text = document.getElementById("text");
+    text.innerHTML = "A következő lehetséges megoldást találtam:";
+    let resultsElement = document.getElementById("possible-results")
+    Object.keys(results).map(result => {
+        let wrapper = document.createElement("div");
+        let resultElement = document.createElement("div");
+        resultElement.classList = `uk-card uk-card-default uk-card-body`;
+        resultElement.innerHTML = 
+            `<div>Szín: ${seatsArray.color} Zóna: ${seatsArray.zone} Sor: ${seatsArray.row}</div>
+            <div>Az általad kért ${neededSeatsCount} darab férőhely a ${results[result].firstReserve} - ${results[result].lastReserve} között elérhető legoptimálisabban.</div>`
+        console.log(results, seatsArray, neededSeatsCount);
+        wrapper.appendChild(resultElement);
+        resultsElement.appendChild(wrapper)
+    })
+}
